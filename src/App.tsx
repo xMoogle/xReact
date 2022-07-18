@@ -1,31 +1,71 @@
-import { Button, Grid, TextField, Typography } from '@material-ui/core';
 import React from 'react';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/estaticos/navbar/Navbar';
+import Footer from './components/estaticos/footer/Footer';
+import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario';
+import Home from './paginas/home/Home';
+import Login from './paginas/login/Login';
 import './App.css';
-import Home from "./pages/home/Home";
-import Footer from "./components/statics/footer/Footer";
-import NavBar from './components/statics/navBar/NavBar';
-import Login from "./pages/login/Login";
-import { Box } from '@mui/material';
-import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario';
+import ListaTema from './components/temas/listatema/ListaTema';
+import ListaPostagem from './components/postagens/listapostagem/ListaPostagem';
+import CadastroPost from './components/postagens/cadastroPost/CadastroPost';
+import CadastroTema from './components/temas/cadastroTema/CadastroTema';
+import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
+import DeletarTema from './components/temas/deletarTema/DeletarTema';
+
 
 function App() {
   return (
     <Router>
-      <NavBar />
-      <Routes>
+      <Navbar />
+      <Switch>
+        <div style={{ minHeight: '100vh' }}>
 
-        <Route path="/" element={<Login  />} />
+          <Route exact path='/'>
+            <Login />
+          </Route>
 
-        <Route path="/home" element={<Home />} />
+          <Route path='/login'>
+            <Login />
+          </Route>
 
-        <Route path="/login" element={<Login />} />
+          <Route path='/home'>
+            <Home />
+          </Route>
 
-        <Route path="/Cadastro" element={<CadastroUsuario />} />
+          <Route path='/cadastrousuario'>
+            <CadastroUsuario />
+          </Route>
+          <Route path='/temas'>
+            <ListaTema />
+          </Route>
+          <Route path='/posts'>
+            <ListaPostagem />
+          </Route>
 
-      </Routes>
-      <Box marginTop={"570px"}><Footer/></Box>
-      
+          <Route exact path='/formularioPostagem'>
+            <CadastroPost />
+          </Route>
+          <Route exact path='/formularioPostagem/:id'>
+            <CadastroPost />
+          </Route>
+          <Route exact path='/formularioTema'>
+            <CadastroTema />
+          </Route>
+          <Route exact path='/formularioTema/:id'>
+            <CadastroTema />
+          </Route>
+          <Route path='/deletarPostagem/:id'>
+            <DeletarPostagem />
+          </Route>
+          <Route path='/deletarTema/:id'>
+            <DeletarTema />
+          </Route>
+
+
+        </div>
+      </Switch>
+      <Footer />
     </Router>
   );
 }
